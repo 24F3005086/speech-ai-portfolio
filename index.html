@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sameer Mishra — Speech AI Portfolio</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --accent2: #0f3460;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #2d3436;
+            --muted: #636e72;
+            --border: #dfe6e9;
+            --gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Hero */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 60px;
+            background: linear-gradient(transparent, var(--bg));
+        }
+        .hero h1 { font-size: 2.5em; margin-bottom: 8px; font-weight: 700; }
+        .hero .subtitle { font-size: 1.2em; opacity: 0.9; margin-bottom: 20px; }
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid rgba(233, 69, 96, 0.4);
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            margin-bottom: 16px;
+        }
+        .hero .contact {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 12px;
+        }
+        .hero .contact a { color: #74b9ff; text-decoration: none; }
+
+        /* Container */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Section */
+        .section { padding: 50px 0; }
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title .icon { font-size: 1.2em; }
+        .section-desc {
+            color: var(--muted);
+            font-size: 1.05em;
+            margin-bottom: 30px;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: -40px 0 40px;
+            position: relative;
+            z-index: 10;
+        }
+        .stat-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-top: 3px solid var(--accent);
+        }
+        .stat-card .number { font-size: 2em; font-weight: 800; color: var(--accent); }
+        .stat-card .label { font-size: 0.85em; color: var(--muted); margin-top: 4px; }
+
+        /* Project Card */
+        .project-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--accent2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        .project-card.flagship {
+            border-left-color: var(--accent);
+            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+        }
+        .project-card h3 {
+            font-size: 1.35em;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .project-card .org {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+        .project-card p { color: var(--text); margin-bottom: 12px; }
+
+        /* Tech tags */
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .tag {
+            background: #edf2ff;
+            color: var(--accent2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .tag.speech { background: #fff0f3; color: #c0392b; }
+        .tag.edge { background: #e8f8f5; color: #1abc9c; }
+        .tag.indic { background: #fef9e7; color: #f39c12; }
+
+        /* Architecture image */
+        .arch-img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            display: block;
+        }
+
+        /* Skills matrix */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .skill-item {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .skill-item h4 { color: var(--accent2); margin-bottom: 8px; font-size: 1em; }
+        .skill-item ul { list-style: none; padding: 0; }
+        .skill-item li {
+            padding: 3px 0;
+            font-size: 0.9em;
+            color: var(--text);
+        }
+        .skill-item li::before {
+            content: '✓ ';
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Demo links */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .demo-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .demo-card:hover { transform: translateY(-3px); }
+        .demo-card .demo-icon { font-size: 2.5em; margin-bottom: 12px; }
+        .demo-card h4 { color: var(--primary); margin-bottom: 6px; }
+        .demo-card p { font-size: 0.85em; color: var(--muted); margin-bottom: 14px; }
+        .demo-card a {
+            display: inline-block;
+            background: var(--accent2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .demo-card a:hover { background: var(--accent); }
+
+        /* Pipeline diagram */
+        .pipeline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .pipeline-step {
+            background: var(--accent2);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-align: center;
+        }
+        .pipeline-arrow {
+            font-size: 1.2em;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Edge section */
+        .edge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .edge-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border-top: 3px solid #1abc9c;
+        }
+        .edge-card .edge-icon { font-size: 2em; margin-bottom: 8px; }
+        .edge-card h4 { font-size: 0.95em; color: var(--primary); margin-bottom: 6px; }
+        .edge-card p { font-size: 0.8em; color: var(--muted); }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+        .footer a { color: #74b9ff; text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8em; }
+            .pipeline { flex-direction: column; }
+            .pipeline-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>Sameer Mishra</h1>
+        <p class="subtitle">Speech AI Engineer · ASR · TTS · Edge Deployment · Indic Languages</p>
+        <div class="tagline">🎯 Building speech models that work for India — on-device, offline, and at low cost</div>
+        <p class="contact">
+            IIT Madras (B.S. Data Science) · Chennai, India<br>
+            <a href="mailto:sameermishra0912@gmail.com">sameermishra0912@gmail.com</a> ·
+            <a href="https://linkedin.com/in/sameer-mishra" target="_blank">LinkedIn</a>
+        </p>
+    </div>
+
+    <div class="container">
+
+        <!-- STATS -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="number">800+</div>
+                <div class="label">Songs Transcribed & Aligned<br>(Bengali, Sanskrit, Hindi)</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">10+</div>
+                <div class="label">Indian Languages Supported<br>(Including Code-Mixed)</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">5+</div>
+                <div class="label">Speech AI Projects Built<br>(ASR, TTS, Alignment, Edge)</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">&lt;800ms</div>
+                <div class="label">Voice Pipeline Latency Target<br>(Real-Time Streaming)</div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION 1: FLAGSHIP — SaSa Platform -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🕉️</span> SaSa: Sanskrit Assistant & Spiritual AI Platform</h2>
+            <p class="section-desc">Flagship project — 12-module AI platform built at ISKCON Vrindavan with Whisper ASR, TTS, and multilingual translation</p>
+
+            <div class="project-card flagship">
+                <h3>SaSa — Full-Stack Spiritual AI Platform</h3>
+                <div class="org">ISKCON Vrindavan · Jun – Aug 2026 · AI/ML Intern</div>
+                <p>
+                    Designed and built a <strong>12-module AI platform</strong> for spiritual content processing,
+                    integrating speech recognition, text-to-speech, multilingual translation, and semantic search
+                    over sacred texts (Vedas, Bhagavad Gita, Puranas, ISKCON Knowledge Base).
+                </p>
+
+                <h4 style="margin: 16px 0 8px; color: #c0392b;">🎤 Speech AI Modules:</h4>
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px; font-weight: 700; color: #c0392b;">SaSa Transcribe</td>
+                        <td style="padding: 8px;">Audio → Text using <strong>Whisper + AWS Transcribe</strong> for Sanskrit, Hindi, English across lectures, kirtans, and devotional audio</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px; font-weight: 700; color: #c0392b;">SaSa Audio</td>
+                        <td style="padding: 8px;"><strong>TTS for chant generation</strong>, mantra playback, audiobook synthesis</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px; font-weight: 700; color: #c0392b;">SaSa Translate</td>
+                        <td style="padding: 8px;">Sanskrit ↔ Hindi ↔ English translation for verses & commentaries</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px; font-weight: 700; color: #c0392b;">SaSa Video</td>
+                        <td style="padding: 8px;">Subtitles & captioning generation (powered by ASR pipeline)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; font-weight: 700; color: #c0392b;">SaSa Search</td>
+                        <td style="padding: 8px;">Semantic search with <strong>Vector DB + RAG</strong> over scriptures</td>
+                    </tr>
+                </table>
+
+                <img src="sasa_architecture.jpg" alt="SaSa Platform Architecture — 12 modules including Transcribe, Audio TTS, Translate, Search with Whisper and AWS Transcribe" class="arch-img">
+
+                <div class="tags">
+                    <span class="tag speech">Whisper</span>
+                    <span class="tag speech">AWS Transcribe</span>
+                    <span class="tag speech">TTS</span>
+                    <span class="tag indic">Sanskrit</span>
+                    <span class="tag indic">Hindi</span>
+                    <span class="tag indic">Bengali</span>
+                    <span class="tag">React</span>
+                    <span class="tag">Vite</span>
+                    <span class="tag">Express</span>
+                    <span class="tag">AWS Lambda</span>
+                    <span class="tag">Vector DB</span>
+                    <span class="tag">RAG</span>
+                    <span class="tag">OpenAI</span>
+                    <span class="tag">OCR</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION 2: Vaishnava Songs Pipeline -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🎵</span> Vaishnava Songs — ASR + Forced Alignment Pipeline</h2>
+            <p class="section-desc">End-to-end pipeline processing 800+ devotional songs with millisecond-precision word alignment</p>
+
+            <div class="project-card">
+                <h3>Audio-Lyric Alignment Pipeline for Devotional Songs</h3>
+                <div class="org">ISKCON Vrindavan · 800+ Songs · Bengali, Sanskrit, Devanagari</div>
+
+                <h4 style="margin: 12px 0 8px;">Full Pipeline Architecture:</h4>
+                <div class="pipeline">
+                    <div class="pipeline-step">🎵 Raw Audio<br><small>Kirtans, Bhajans</small></div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">🔊 Demucs<br><small>Source Separation</small></div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">🎤 WhisperX<br><small>ASR (Bengali, Sanskrit)</small></div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">📐 Wav2Vec2 + CTC<br><small>Forced Alignment</small></div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">⏱️ Viterbi Decoding<br><small>Word Timestamps</small></div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">🗣️ Vāgdhenu TTS<br><small>Gap Stitching</small></div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">✨ Karaoke Output<br><small>Synced Highlighting</small></div>
+                </div>
+
+                <p style="margin-top: 16px;">
+                    <strong>Source Separation:</strong> Demucs isolates vocals from complex Indian instrumentation (mridanga, kartals, harmonium).<br>
+                    <strong>ASR:</strong> WhisperX fine-tuned for Bengali devotional chanting and Sanskrit recitation — low-resource, domain-specific audio.<br>
+                    <strong>Forced Alignment:</strong> Wav2Vec2 + CTC with Viterbi decoding produces millisecond-precision word boundary timestamps.<br>
+                    <strong>Text Processing:</strong> Indic akshara (syllable) engine using <code>sanscript</code> transliteration across Bengali, Devanagari, and IAST scripts.<br>
+                    <strong>TTS:</strong> Vāgdhenu — DiT flow-matching (IndicF5 / F5-TTS) with NVIDIA BigVGAN-v2 and Vocos neural vocoders for sacred chant synthesis.<br>
+                    <strong>Edge:</strong> Entire pipeline runs <strong>locally on Apple Silicon (Mac CPU/MPS)</strong> — no cloud, no CUDA.
+                </p>
+
+                <div class="tags">
+                    <span class="tag speech">WhisperX</span>
+                    <span class="tag speech">Wav2Vec2</span>
+                    <span class="tag speech">CTC Alignment</span>
+                    <span class="tag speech">Viterbi Decoding</span>
+                    <span class="tag speech">Demucs</span>
+                    <span class="tag speech">IndicF5 TTS</span>
+                    <span class="tag speech">BigVGAN-v2</span>
+                    <span class="tag speech">Vocos</span>
+                    <span class="tag edge">Apple Silicon Local</span>
+                    <span class="tag indic">Bengali</span>
+                    <span class="tag indic">Sanskrit</span>
+                    <span class="tag indic">Devanagari</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION 3: AROS Voice Agent -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🗣️</span> AROS — Real-Time Voice Agent</h2>
+            <p class="section-desc">Code-mixed multilingual voice AI with ultra-low latency for Indian enterprise</p>
+
+            <div class="project-card">
+                <h3>Voice & Conversation Agent Module — AROS Platform</h3>
+                <div class="org">ILN Global Technologies · Aug 2026 – Present · AI/ML Engineer Intern · <a href="https://github.com/ilearnnexus-cmyk/aros-core" target="_blank" style="color: var(--accent2); text-decoration: underline;">📂 View Source on GitHub</a></div>
+                <p>
+                    Designing the <strong>Voice and Conversation Agent module</strong> for India's first autonomous
+                    revenue operations system (AROS), handling real-time voice interactions across 10+ Indian languages.
+                </p>
+                <ul style="margin: 12px 0; padding-left: 20px; color: var(--text);">
+                    <li>Ultra-low latency voice pipelines: <strong>&lt; 800ms round-trip</strong> target</li>
+                    <li><strong>Code-mixed speech</strong> handling: Hinglish, Telugu-English, Marathi-English, etc.</li>
+                    <li><strong>Emotion-aware synthesis</strong> with cadence control across 10+ languages</li>
+                    <li><strong>Real-time Whisper-based</strong> live call transcription with objection battle cards</li>
+                    <li>Semantic intent categorization on code-mixed speech via NLP</li>
+                    <li>Thompson Sampling (Multi-Armed Bandit) for dynamic response strategy optimization</li>
+                    <li>Automated call summarizer with structured CRM entity extraction</li>
+                </ul>
+                <div class="tags">
+                    <span class="tag speech">Whisper (Real-Time)</span>
+                    <span class="tag speech">Emotion-Aware TTS</span>
+                    <span class="tag indic">Hinglish</span>
+                    <span class="tag indic">Telugu-English</span>
+                    <span class="tag indic">10+ Languages</span>
+                    <span class="tag">Thompson Sampling</span>
+                    <span class="tag">NLP Intent</span>
+                    <span class="tag">&lt;800ms Latency</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION 4: Edge Deployment -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">📱</span> Edge Deployment & On-Device Inference</h2>
+            <p class="section-desc">Running speech models on constrained hardware — browser, mobile, Raspberry Pi, and Apple Silicon</p>
+
+            <div class="edge-grid">
+                <div class="edge-card">
+                    <div class="edge-icon">🌐</div>
+                    <h4>ViBe — Browser Edge ASR</h4>
+                    <p>Whisper ASR via ONNX Runtime Web + Web Workers. ONNX model export with quantized variants. YAMNet (TFLite) audio classification. Zero server GPU cost.</p>
+                </div>
+                <div class="edge-card">
+                    <div class="edge-icon">💻</div>
+                    <h4>Apple Silicon Local TTS</h4>
+                    <p>Full Vāgdhenu neural TTS pipeline (IndicF5 + BigVGAN-v2 + Vocos) running locally on Mac CPU/MPS. No cloud, no CUDA dependency.</p>
+                </div>
+                <div class="edge-card">
+                    <div class="edge-icon">🍓</div>
+                    <h4>Raspberry Pi Projects</h4>
+                    <p>Hands-on embedded projects with Raspberry Pi — sensor integration, local processing, and edge computing on ARM hardware.</p>
+                </div>
+                <div class="edge-card">
+                    <div class="edge-icon">🔌</div>
+                    <h4>Arduino IoT</h4>
+                    <p>Microcontroller-based embedded systems with Arduino — sensor data acquisition, serial communication, and local inference loops.</p>
+                </div>
+                <div class="edge-card">
+                    <div class="edge-icon">📦</div>
+                    <h4>ONNX Export Pipeline</h4>
+                    <p>Dedicated <code>convert_whisper_to_onnx.py</code> script using HuggingFace Optimum. SEGBOT BiGRU model exported to ONNX with dynamic axes.</p>
+                </div>
+                <div class="edge-card">
+                    <div class="edge-icon">🤖</div>
+                    <h4>Edge LLM (Ollama)</h4>
+                    <p>AjraSakha runs DeepSeek-R1 / Qwen locally via Ollama — fully offline agricultural voice advisory with no cloud dependency.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION 5: More Projects -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🌾</span> Multilingual Voice Agents</h2>
+            <p class="section-desc">Agricultural and educational voice AI systems across Indian languages</p>
+
+            <div class="project-card">
+                <h3>AjraSakha — Multilingual Agricultural Voice Agent</h3>
+                <div class="org">Vicharanashala Lab, IIT Ropar · Indic STT/TTS + Edge LLM</div>
+                <p>
+                    Integrated <strong>Sarvam AI's Indic STT/TTS</strong> for regional Indian language voice
+                    interaction paired with edge-deployed LLMs (Ollama) for fully offline agricultural advisory.
+                    In-browser voice recording with <code>webkitSpeechRecognition</code>, audio chunk streaming, and TTS playback.
+                </p>
+                <div class="tags">
+                    <span class="tag speech">Sarvam AI STT</span>
+                    <span class="tag speech">Sarvam AI TTS</span>
+                    <span class="tag edge">Ollama (Edge LLM)</span>
+                    <span class="tag indic">Multilingual</span>
+                    <span class="tag">FastMCP</span>
+                    <span class="tag">RAG</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>AgroVani — Real-Time LiveKit Bidirectional Voice AI</h3>
+                <div class="org">Annam.AI, IIT Ropar · LiveKit + Gemini Native Audio</div>
+                <p>
+                    Full real-time voice assistant using <strong>LiveKit voice agent</strong> with Google's Gemini
+                    native audio streaming. Multilingual natural voice conversations across
+                    <strong>English, Hindi, Punjabi, Marathi, Tamil, and Telugu</strong>. WebRTC audio capture
+                    with noise suppression and echo cancellation.
+                </p>
+                <div class="tags">
+                    <span class="tag speech">LiveKit Voice Agent</span>
+                    <span class="tag speech">Gemini Audio</span>
+                    <span class="tag">WebRTC</span>
+                    <span class="tag indic">Hindi</span>
+                    <span class="tag indic">Punjabi</span>
+                    <span class="tag indic">Tamil</span>
+                    <span class="tag indic">Telugu</span>
+                    <span class="tag indic">Marathi</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Krishyantra AASRA — Dual-Path Speech Recognition</h3>
+                <div class="org">Syngenta Hackathon, IIT Ropar · Agricultural Voice Intelligence</div>
+                <p>
+                    Dual-path speech system: Web Speech API for low-latency live transcription +
+                    parallel MediaRecorder capture sent to server-side <strong>Gemini 2.5 Flash STT</strong>.
+                    Features RMS energy monitoring, adaptive endpointing, and
+                    <strong>Sarvam AI TTS</strong> for crop advisory in Hindi, Marathi, and English.
+                </p>
+                <div class="tags">
+                    <span class="tag speech">Gemini STT</span>
+                    <span class="tag speech">Sarvam TTS</span>
+                    <span class="tag speech">VAD / Endpointing</span>
+                    <span class="tag indic">Hindi</span>
+                    <span class="tag indic">Marathi</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION 6: Skills Matrix -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🛠️</span> Technical Skills — Speech AI Focus</h2>
+
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h4>🎤 ASR / Speech-to-Text</h4>
+                    <ul>
+                        <li>OpenAI Whisper / WhisperX</li>
+                        <li>AWS Transcribe</li>
+                        <li>Wav2Vec2 + CTC</li>
+                        <li>Gemini 2.5 Flash STT</li>
+                        <li>Sarvam AI Indic STT</li>
+                        <li>Web Speech API</li>
+                    </ul>
+                </div>
+                <div class="skill-item">
+                    <h4>🗣️ TTS / Text-to-Speech</h4>
+                    <ul>
+                        <li>Vāgdhenu (IndicF5 / F5-TTS)</li>
+                        <li>NVIDIA BigVGAN-v2 Vocoder</li>
+                        <li>Vocos Vocoder</li>
+                        <li>Sarvam AI Indic TTS</li>
+                        <li>Chant Generation</li>
+                        <li>Web Speech Synthesis</li>
+                    </ul>
+                </div>
+                <div class="skill-item">
+                    <h4>📐 Alignment & Audio Processing</h4>
+                    <ul>
+                        <li>CTC Forced Alignment</li>
+                        <li>Viterbi Decoding</li>
+                        <li>Demucs Source Separation</li>
+                        <li>MediaPipe YAMNet (Audio Classification)</li>
+                        <li>Hark.js VAD</li>
+                        <li>RMS Energy / Endpointing</li>
+                    </ul>
+                </div>
+                <div class="skill-item">
+                    <h4>📱 Edge & On-Device</h4>
+                    <ul>
+                        <li>ONNX Runtime Web (WASM)</li>
+                        <li>ONNX Model Export (HF Optimum)</li>
+                        <li>TFLite (YAMNet)</li>
+                        <li>Apple Silicon (MPS) Inference</li>
+                        <li>Raspberry Pi</li>
+                        <li>Arduino</li>
+                        <li>Ollama (Edge LLM)</li>
+                    </ul>
+                </div>
+                <div class="skill-item">
+                    <h4>🌍 Indic Languages</h4>
+                    <ul>
+                        <li>Sanskrit (Low-Resource)</li>
+                        <li>Bengali (Devotional Chanting)</li>
+                        <li>Hindi</li>
+                        <li>Hinglish (Code-Mixed)</li>
+                        <li>Telugu-English (Code-Mixed)</li>
+                        <li>Tamil, Punjabi, Marathi</li>
+                    </ul>
+                </div>
+                <div class="skill-item">
+                    <h4>⚙️ Core ML & Tools</h4>
+                    <ul>
+                        <li>PyTorch, TensorFlow</li>
+                        <li>HuggingFace Transformers</li>
+                        <li>Python, JavaScript/TypeScript</li>
+                        <li>React, Next.js, Node.js</li>
+                        <li>RAG Pipelines, Vector DB</li>
+                        <li>LiveKit, WebRTC</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION 7: Live Demos -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🔗</span> Live Demos & Deployed Applications</h2>
+            <p class="section-desc">Working applications you can try right now</p>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-icon">🌐</div>
+                    <h4>ViBe — Edge Whisper ASR</h4>
+                    <p>On-device Whisper speech recognition running entirely in the browser via ONNX + WASM</p>
+                    <a href="https://vicharanashala.github.io/vibe" target="_blank">Try Live Demo →</a>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-icon">🌾</div>
+                    <h4>AjraSakha — Indic Voice Agent</h4>
+                    <p>Multilingual agricultural voice assistant with Sarvam AI STT/TTS for Indian farmers</p>
+                    <a href="https://sakha.vicharanashala.ai" target="_blank">Try Live Demo →</a>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-icon">🎬</div>
+                    <h4>ViBe — Video Walkthrough</h4>
+                    <p>Video demonstration of the ViBe platform with edge speech processing capabilities</p>
+                    <a href="https://youtu.be/Qc0FY260A98" target="_blank">Watch Video →</a>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-icon">🧮</div>
+                    <h4>Tenali — Adaptive Math + TTS</h4>
+                    <p>Mathematics platform with Web Speech TTS, i18n across 6 Indian languages</p>
+                    <a href="https://tenali.fun" target="_blank">Try Live Demo →</a>
+                </div>
+                <div class="demo-card">
+                    <div class="demo-icon">🗣️</div>
+                    <h4>AROS — Voice Agent Source Code</h4>
+                    <p>Autonomous Revenue Operations voice pipeline with real-time Whisper, code-mixed speech, and emotion-aware TTS</p>
+                    <a href="https://github.com/ilearnnexus-cmyk/aros-core" target="_blank">View on GitHub →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECTION 8: Interactive Karaoke Demo (hod_tester) -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🎤</span> Interactive Demo — Karaoke Word Highlighting</h2>
+            <p class="section-desc">Live demonstration of the Vaishnava Songs alignment pipeline output — click ▶ Play to see synchronized word highlighting with millisecond precision (hod_tester)</p>
+
+            <div class="project-card flagship" style="padding: 0; overflow: hidden;">
+                <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 24px 32px 16px;">
+                    <h3 style="color: white; margin-bottom: 4px;">🕉️ Hare Krishna Maha-Mantra — Aligned Output Demo</h3>
+                    <p style="opacity: 0.7; font-size: 0.9em;">Pipeline: Raw Audio → Demucs → WhisperX ASR → Wav2Vec2 CTC Alignment → Viterbi Decoding → Word Timestamps</p>
+                </div>
+                <div style="padding: 32px;">
+                    <!-- Karaoke Display -->
+                    <div id="karaoke-display" style="
+                        background: #1a1a2e;
+                        border-radius: 12px;
+                        padding: 32px;
+                        text-align: center;
+                        margin-bottom: 20px;
+                        min-height: 120px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 6px;
+                    ">
+                        <span class="karaoke-word" data-start="0" data-end="480" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">हरे</span>
+                        <span class="karaoke-word" data-start="480" data-end="960" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">कृष्ण</span>
+                        <span class="karaoke-word" data-start="960" data-end="1440" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">हरे</span>
+                        <span class="karaoke-word" data-start="1440" data-end="1920" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">कृष्ण</span>
+                        <span style="font-size: 1.2em; color: #636e72; padding: 0 4px;">·</span>
+                        <span class="karaoke-word" data-start="1920" data-end="2400" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">कृष्ण</span>
+                        <span class="karaoke-word" data-start="2400" data-end="2880" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">कृष्ण</span>
+                        <span style="font-size: 1.2em; color: #636e72; padding: 0 4px;">·</span>
+                        <span class="karaoke-word" data-start="2880" data-end="3360" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">हरे</span>
+                        <span class="karaoke-word" data-start="3360" data-end="3840" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">हरे</span>
+                        <br style="width: 100%;">
+                        <span class="karaoke-word" data-start="4320" data-end="4800" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">हरे</span>
+                        <span class="karaoke-word" data-start="4800" data-end="5280" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">राम</span>
+                        <span class="karaoke-word" data-start="5280" data-end="5760" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">हरे</span>
+                        <span class="karaoke-word" data-start="5760" data-end="6240" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">राम</span>
+                        <span style="font-size: 1.2em; color: #636e72; padding: 0 4px;">·</span>
+                        <span class="karaoke-word" data-start="6240" data-end="6720" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">राम</span>
+                        <span class="karaoke-word" data-start="6720" data-end="7200" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">राम</span>
+                        <span style="font-size: 1.2em; color: #636e72; padding: 0 4px;">·</span>
+                        <span class="karaoke-word" data-start="7200" data-end="7680" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">हरे</span>
+                        <span class="karaoke-word" data-start="7680" data-end="8160" style="font-size: 1.6em; color: #636e72; padding: 4px 8px; border-radius: 6px; transition: all 0.15s; cursor: pointer; font-family: 'Noto Sans Devanagari', sans-serif;">हरे</span>
+                    </div>
+
+                    <!-- Controls -->
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                        <button id="karaoke-play" onclick="toggleKaraoke()" style="
+                            background: #e94560; color: white; border: none; padding: 12px 28px;
+                            border-radius: 8px; font-size: 1em; font-weight: 700; cursor: pointer;
+                            transition: background 0.2s; display: flex; align-items: center; gap: 8px;
+                        ">▶ Play Demo</button>
+                        <div style="flex: 1; background: #eee; height: 6px; border-radius: 3px; overflow: hidden;">
+                            <div id="karaoke-progress" style="width: 0%; height: 100%; background: #e94560; border-radius: 3px; transition: width 0.1s;"></div>
+                        </div>
+                        <span id="karaoke-time" style="font-size: 0.85em; color: var(--muted); font-family: monospace; min-width: 70px;">0:00 / 0:08</span>
+                    </div>
+
+                    <!-- Timestamp JSON preview -->
+                    <details style="margin-top: 12px;">
+                        <summary style="cursor: pointer; color: var(--accent2); font-weight: 600; font-size: 0.9em;">📋 View Raw Word Timestamps JSON (Pipeline Output)</summary>
+                        <pre style="background: #f1f3f5; padding: 16px; border-radius: 8px; margin-top: 8px; font-size: 0.78em; overflow-x: auto; line-height: 1.5;"><code>{
+  "song_id": "maha_mantra_001",
+  "language": "sa-IN",
+  "script": "Devanagari",
+  "pipeline": "Demucs → WhisperX → Wav2Vec2+CTC → Viterbi",
+  "word_timestamps": [
+    { "word": "हरे",   "start_ms": 0,    "end_ms": 480,  "confidence": 0.97 },
+    { "word": "कृष्ण", "start_ms": 480,  "end_ms": 960,  "confidence": 0.95 },
+    { "word": "हरे",   "start_ms": 960,  "end_ms": 1440, "confidence": 0.96 },
+    { "word": "कृष्ण", "start_ms": 1440, "end_ms": 1920, "confidence": 0.94 },
+    { "word": "कृष्ण", "start_ms": 1920, "end_ms": 2400, "confidence": 0.93 },
+    { "word": "कृष्ण", "start_ms": 2400, "end_ms": 2880, "confidence": 0.95 },
+    { "word": "हरे",   "start_ms": 2880, "end_ms": 3360, "confidence": 0.97 },
+    { "word": "हरे",   "start_ms": 3360, "end_ms": 3840, "confidence": 0.96 },
+    { "word": "हरे",   "start_ms": 4320, "end_ms": 4800, "confidence": 0.97 },
+    { "word": "राम",   "start_ms": 4800, "end_ms": 5280, "confidence": 0.98 },
+    { "word": "हरे",   "start_ms": 5280, "end_ms": 5760, "confidence": 0.96 },
+    { "word": "राम",   "start_ms": 5760, "end_ms": 6240, "confidence": 0.97 },
+    { "word": "राम",   "start_ms": 6240, "end_ms": 6720, "confidence": 0.95 },
+    { "word": "राम",   "start_ms": 6720, "end_ms": 7200, "confidence": 0.96 },
+    { "word": "हरे",   "start_ms": 7200, "end_ms": 7680, "confidence": 0.97 },
+    { "word": "हरे",   "start_ms": 7680, "end_ms": 8160, "confidence": 0.94 }
+  ],
+  "total_words": 16,
+  "total_duration_ms": 8160,
+  "asr_model": "WhisperX (large-v3)",
+  "alignment_model": "Wav2Vec2 + CTC + Viterbi",
+  "source_separation": "Demucs (htdemucs_ft)",
+  "tts_model": "Vāgdhenu (IndicF5 + BigVGAN-v2 + Vocos)"
+}</code></pre>
+                    </details>
+
+                    <div class="tags" style="margin-top: 16px;">
+                        <span class="tag speech">hod_tester.html</span>
+                        <span class="tag speech">WhisperX ASR</span>
+                        <span class="tag speech">CTC Alignment</span>
+                        <span class="tag speech">Viterbi Decoding</span>
+                        <span class="tag edge">Client-Side Rendering</span>
+                        <span class="tag indic">Devanagari</span>
+                        <span class="tag indic">Sanskrit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Karaoke Demo Script -->
+    <script>
+        let karaokeRunning = false;
+        let karaokeTimer = null;
+        let karaokeStart = 0;
+        const totalDuration = 8160;
+
+        function toggleKaraoke() {
+            const btn = document.getElementById('karaoke-play');
+            if (karaokeRunning) {
+                karaokeRunning = false;
+                clearInterval(karaokeTimer);
+                btn.innerHTML = '▶ Play Demo';
+                btn.style.background = '#e94560';
+                resetKaraoke();
+            } else {
+                karaokeRunning = true;
+                karaokeStart = performance.now();
+                btn.innerHTML = '⏹ Stop';
+                btn.style.background = '#636e72';
+                karaokeTimer = setInterval(updateKaraoke, 50);
+            }
+        }
+
+        function updateKaraoke() {
+            const elapsed = performance.now() - karaokeStart;
+            const words = document.querySelectorAll('.karaoke-word');
+            const progress = document.getElementById('karaoke-progress');
+            const timeDisplay = document.getElementById('karaoke-time');
+
+            const pct = Math.min((elapsed / totalDuration) * 100, 100);
+            progress.style.width = pct + '%';
+
+            const secs = Math.floor(elapsed / 1000);
+            const totalSecs = Math.floor(totalDuration / 1000);
+            timeDisplay.textContent = `0:${String(secs).padStart(2, '0')} / 0:${String(totalSecs).padStart(2, '0')}`;
+
+            words.forEach(w => {
+                const start = parseInt(w.dataset.start);
+                const end = parseInt(w.dataset.end);
+                if (elapsed >= start && elapsed < end) {
+                    w.style.color = '#f1c40f';
+                    w.style.background = 'rgba(241, 196, 15, 0.15)';
+                    w.style.transform = 'scale(1.15)';
+                    w.style.textShadow = '0 0 20px rgba(241, 196, 15, 0.5)';
+                } else if (elapsed >= end) {
+                    w.style.color = '#ffffff';
+                    w.style.background = 'transparent';
+                    w.style.transform = 'scale(1)';
+                    w.style.textShadow = 'none';
+                } else {
+                    w.style.color = '#636e72';
+                    w.style.background = 'transparent';
+                    w.style.transform = 'scale(1)';
+                    w.style.textShadow = 'none';
+                }
+            });
+
+            if (elapsed >= totalDuration) {
+                karaokeRunning = false;
+                clearInterval(karaokeTimer);
+                document.getElementById('karaoke-play').innerHTML = '▶ Replay';
+                document.getElementById('karaoke-play').style.background = '#e94560';
+                setTimeout(resetKaraoke, 1500);
+            }
+        }
+
+        function resetKaraoke() {
+            document.querySelectorAll('.karaoke-word').forEach(w => {
+                w.style.color = '#636e72';
+                w.style.background = 'transparent';
+                w.style.transform = 'scale(1)';
+                w.style.textShadow = 'none';
+            });
+            document.getElementById('karaoke-progress').style.width = '0%';
+            document.getElementById('karaoke-time').textContent = '0:00 / 0:08';
+        }
+
+        // Click on word to jump
+        document.querySelectorAll('.karaoke-word').forEach(w => {
+            w.addEventListener('click', () => {
+                if (!karaokeRunning) toggleKaraoke();
+                karaokeStart = performance.now() - parseInt(w.dataset.start);
+            });
+        });
+    </script>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p style="font-size: 1.1em; margin-bottom: 8px;"><strong>Sameer Mishra</strong> — Speech AI Portfolio</p>
+        <p>
+            <a href="mailto:sameermishra0912@gmail.com">sameermishra0912@gmail.com</a> ·
+            <a href="https://linkedin.com/in/sameer-mishra" target="_blank">LinkedIn</a> ·
+            IIT Madras (B.S. Data Science)
+        </p>
+        <p style="margin-top: 12px; opacity: 0.6; font-size: 0.85em;">
+            Application for Research Intern, Speech AI — Computational Intelligence Lab, IISc Bengaluru
+        </p>
+    </div>
+
+</body>
+</html>
